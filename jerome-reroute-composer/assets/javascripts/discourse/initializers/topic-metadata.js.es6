@@ -19,7 +19,7 @@ function initializeTestPlugin(api) {
 	      } else {
 	         $.cookie("destination_url", window.location.href);
 	         this.replaceWith("login");
-	         console.log("after replaced with login",e);
+	         console.log("after replaced with login");
 	      }
 	   }
 	});
