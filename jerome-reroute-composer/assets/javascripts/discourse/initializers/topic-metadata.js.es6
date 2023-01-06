@@ -7,17 +7,21 @@ import { next } from "@ember/runloop";
 function initializeTestPlugin(api) {
 	
 	api.modifyClass('route:new-message', {
-		beforeModel(transition) {
-			const params = transition.to.queryParams;
-			const groupName = params.groupname || params.group_name;
-			if (this.currentUser) {
-				this.replaceWith("userPrivateMessages", this.currentUser).then(e => {
-				});
-			} else {
-				$.cookie("destination_url", window.location.href);
-				this.replaceWith("login");
-			}
-		}
+	   beforeModel(transition) {
+	      const params = transition.to.queryParams;
+	      const groupName = params.groupname || params.group_name;
+	      console.log("New message", this.currentUser,params,groupName);
+	      if (this.currentUser) {
+	         this.replaceWith("userPrivateMessages", this.currentUser).then(e => {
+	            console.log("replaced with userPrivateMessages",e);
+	         });
+	         console.log("after replaced with userPrivateMessages");
+	      } else {
+	         $.cookie("destination_url", window.location.href);
+	         this.replaceWith("login");
+	         console.log("after replaced with login",e);
+	      }
+	   }
 	});
 }
 export default {
